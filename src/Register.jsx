@@ -16,7 +16,7 @@ export const Register = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(`${API_URL}/register`, {
+    const response = await fetch(`${API_URL}/api/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export const Register = () => {
       body: JSON.stringify(values),
     });
     if (response.status === 200) {
-      const loginResponse = await fetch(`${API_URL}/login`, {
+      const loginResponse = await fetch(`${API_URL}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,8 +34,8 @@ export const Register = () => {
           password: values.password,
         }),
       });
-      const json = await loginResponse.json();
-      localStorage.setItem("backend-test-token", json.token);
+      const token = await loginResponse.text();
+      localStorage.setItem("backend-test-token", token);
       navigate("/");
     }
   };

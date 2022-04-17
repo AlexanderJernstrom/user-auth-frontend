@@ -16,7 +16,7 @@ export const Login = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(`${API_URL}/login`, {
+    const response = await fetch(`${API_URL}/api/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

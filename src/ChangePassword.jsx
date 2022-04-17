@@ -9,11 +9,11 @@ export const ChangePassword = () => {
   const params = useParams();
 
   const updatePassword = async () => {
-    const response = await fetch(`${API_URL}/update-password`, {
-      method: "POST",
+    const response = await fetch(`${API_URL}/api/account/updatePassword`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        authorization: `${localStorage.getItem("backend-test-token")}`,
+        token: `${localStorage.getItem("backend-test-token")}`,
       },
       body: JSON.stringify({ newPassword, token: params.token }),
     });

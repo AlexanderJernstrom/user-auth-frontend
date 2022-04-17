@@ -9,11 +9,11 @@ export const SearchUsers = () => {
   const navigate = useNavigate();
 
   const searchUsers = async (e) => {
-    const res = await fetch(`${API_URL}/users/search?search=${search}`, {
-      headers: { authorization: localStorage.getItem("backend-test-token") },
+    const res = await fetch(`${API_URL}/api/users/search?search=${search}`, {
+      headers: { token: localStorage.getItem("backend-test-token") },
     });
     const data = await res.json();
-    setResults(data);
+    setResults(data.users);
   };
 
   return (

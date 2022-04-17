@@ -10,8 +10,8 @@ export const HomePage = () => {
   const [showAlert, setShowAlert] = useState(false);
 
   const getUser = async () => {
-    const response = await fetch(`${API_URL}/profile`, {
-      headers: { authorization: localStorage.getItem("backend-test-token") },
+    const response = await fetch(`${API_URL}/api/account`, {
+      headers: { token: localStorage.getItem("backend-test-token") },
     });
     const json = await response.json();
     setLoading(false);
@@ -19,9 +19,9 @@ export const HomePage = () => {
   };
 
   const deleteAccount = async () => {
-    const response = await fetch(`${API_URL}/user/delete`, {
+    const response = await fetch(`${API_URL}/api/account/delete`, {
       method: "DELETE",
-      headers: { authorization: localStorage.getItem("backend-test-token") },
+      headers: { token: localStorage.getItem("backend-test-token") },
     });
     if (response.status === 200) {
       localStorage.removeItem("backend-test-token");
@@ -30,13 +30,16 @@ export const HomePage = () => {
   };
 
   const resetPassword = async () => {
-    const response = await fetch(`${API_URL}/send-reset-password-email`, {
-      method: "POST",
-      headers: {
-        authorization: localStorage.getItem("backend-test-token"),
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${API_URL}/api/account/sendResetPasswordLink`,
+      {
+        method: "POST",
+        headers: {
+          authorization: localStorage.getItem("backend-test-token"),
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const json = await response.json();
 
     if (json.success) {
